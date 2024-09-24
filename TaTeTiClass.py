@@ -6,6 +6,7 @@ from humano import Humano
 from Constantes import*
 from tablero import Tablero,Celda,construccion_tablero
 from COM import ConexionSerie
+import time
 
 class TaTeTi:
     def __init__(self):
@@ -133,6 +134,8 @@ class TaTeTi:
                 #Bot
                 print("Computadora pensando..")
                 pygame.time.delay(DELAY)  # Retardo de 300ms para visualizar el progreso
+
+                time.sleep(1)
                 
                 cuadrado = bot.movimiento_bot(self.tablero)
                 self.tablero[cuadrado] = self.agente
