@@ -129,6 +129,8 @@ class TaTeTi:
                 self.conexion_serie.enviar_comando(":H"+str(cuadrado+1))
                 pygame.display.flip()
                 if self.verificar_ganador():
+                    self.conexion_serie.enviar_comando("reiniciar")
+                    self.conexion_serie.cerrar_conexion()
                     break
                 
                 #Bot
@@ -142,6 +144,8 @@ class TaTeTi:
                 tablero_grafico.dibujar(ventana, self.tablero)
                 self.conexion_serie.enviar_comando(":B"+str(cuadrado+1))
                 if self.verificar_ganador():
+                    self.conexion_serie.enviar_comando("reiniciar")
+                    self.conexion_serie.cerrar_conexion()
                     break
 
                 posicion = 0
