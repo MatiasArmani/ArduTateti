@@ -5,7 +5,7 @@ import pygame
 from humano import Humano
 from Constantes import*
 from tablero import Tablero,Celda,construccion_tablero
-from serial import ConexionSerie
+from COM import ConexionSerie
 
 class TaTeTi:
     def __init__(self):

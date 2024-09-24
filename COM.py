@@ -1,5 +1,4 @@
 import serial
-import time
 
 class ConexionSerie:
     def __init__(self, puerto, baudrate, timeout=2):
@@ -20,9 +19,9 @@ class ConexionSerie:
 
     def abrir_conexion(self):
         try:
-            self.conexion = serial.Serial(self.puerto, self.baudrate, timeout=self.timeout)
+            self.conexion = COM.Serial(self.puerto, self.baudrate, timeout=self.timeout)
             print(f"Conexión establecida en {self.puerto} con baudrate {self.baudrate}")
-        except serial.SerialException as e:
+        except COM.SerialException as e:
             print(f"Error al abrir la conexión: {e}")
             exit(1)
 
@@ -46,7 +45,7 @@ class ConexionSerie:
                     return None
             else:
                 print("La conexión no está abierta.")
-        except serial.SerialException as e:
+        except COM.SerialException as e:
             print(f"Error al leer datos: {e}")
         except Exception as e:
             print(f"Error inesperado: {e}")
@@ -61,7 +60,7 @@ class ConexionSerie:
                 print(f"Comando '{comando.strip()}' enviado.")
             else:
                 print("La conexión no está abierta.")
-        except serial.SerialException as e:
+        except COM.SerialException as e:
             print(f"Error al enviar comando: {e}")
 
     def cerrar_conexion(self):
