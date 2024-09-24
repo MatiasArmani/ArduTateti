@@ -5,10 +5,17 @@ import pygame
 from humano import Humano
 from Constantes import*
 from tablero import Tablero,Celda,construccion_tablero
+from serial import ConexionSerie
 
 class TaTeTi:
     def __init__(self):
         self.tablero = ['-' for _ in range(9)]
+
+        puerto = input("Introduce el puerto del dispositivo serie: ")
+        baudrate_input = input("Introduce el baudrate: ")
+        self.conexion_serie = ConexionSerie(puerto, baudrate_input) if puerto and baudrate_input else None
+        self.conexion_serie.abrir_conexion()
+
         if random.randint(0, 1) == 1:
             self.humano = 'X'
             self.agente = "O"
@@ -118,6 +125,7 @@ class TaTeTi:
                 cuadrado = humano.jugada_humano(self.tablero, posicion)
                 self.tablero[cuadrado] = self.humano
                 tablero_grafico.dibujar(ventana, self.tablero)
+                self.conexion_serie.enviar_comando(":H"+str(cuadrado+1))
                 pygame.display.flip()
                 if self.verificar_ganador():
                     break
@@ -129,6 +137,7 @@ class TaTeTi:
                 cuadrado = bot.movimiento_bot(self.tablero)
                 self.tablero[cuadrado] = self.agente
                 tablero_grafico.dibujar(ventana, self.tablero)
+                self.conexion_serie.enviar_comando(":B"+str(cuadrado+1))
                 if self.verificar_ganador():
                     break
 
